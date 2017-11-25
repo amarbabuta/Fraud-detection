@@ -12,7 +12,7 @@ def k_fold_cross_validation(items, randomize=False):
 	if randomize:
 		items = list(items)
 		shuffle(items)
-	slices = [items[i::k] for i in xrange(k)]
+	slices = [items[i::k] for i in range(k)]
 	return slices
 
 #loading the data as well as converting the data into float value. 
@@ -28,10 +28,10 @@ def data(fname):
 	return X
  
 # Calculate the Gini index for a split dataset
-def gini(groups,class_values):
+def gini(left_right,class_values):
 	gini_value = 0.0
 	for class_value in class_values:#for each class_value 
-		for group in groups:
+		for group in left_right:
 			number=0.0
 			size = len(group)
 			if size == 0:
@@ -94,7 +94,7 @@ def splitting(dataset):
 	node_groups =None
 	for index in range(len(dataset[0])-1):
 	#all index values for all the attributes
-		count=0.0
+		count=0.0#to store the number of rows in the training data set
 		count_row=0.0
 		for row in dataset:#here we take the average of the values in a attribute to split the data 
 			count+=1
@@ -168,7 +168,6 @@ def decision_tree(train, test):
 		predictions.append(prediction)
 	return(predictions)
 
-
 dataset = data(filename)
 scores = calculate_accuracy(dataset)
-print('Mean Accuracy: %.3f%%' % (sum(scores)/(len(scores))))
+print('Obtained Accuracy: %.3f%%' % (sum(scores)/(len(scores))))
